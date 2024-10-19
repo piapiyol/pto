@@ -1,0 +1,243 @@
+#!/bin/bash
+
+export DEBIAN_FRONTEND=noninteractive
+
+Yellow='\033[0;33m'
+Blue='\033[0;34m'
+Purple='\033[0;35m'
+Green="\033[32m"
+Red="\033[31m"
+WhiteB="\e[5;37;40m"
+BlueCyan="\e[5;36;40m"
+Green_background="\033[42;37m"
+Red_background="\033[41;37m"
+Suffix="\033[0m"
+
+source /etc/os-release
+PKG="apt-get install -y"
+IPMOD="$(cat /root/.ipmod | tr -d '\n')"
+CURL="curl -$IPMOD -LksS --max-time 30"
+mkdir -p /tmp/install
+TEMP="/tmp/install"
+REPOSITORY="https://scriptcjxrq91ay.potatonc.my.id"
+apt --fix-broken install -y
+apt update
+
+
+ResultErr() {
+  echo ""
+  echo -e " $Red$1$Suffix"
+  echo ""
+}
+
+ResultSuccess() {
+  echo ""
+  echo -e " $Green$1$Suffix"
+  echo ""
+}
+
+CurlWRFull() {
+  $CURL -H "x-api-key: potato" -w @- -o "$@" <<'EOF'
+    Response Code  :  %{response_code}\n
+    Status Code    :  %{http_code}\n
+    Time Lookup    :  %{time_namelookup}\n
+    Time Connect   :  %{time_connect}\n
+    Time App Conn  :  %{time_appconnect}\n
+    Time Total     :  %{time_total}\n
+    ---------------------------------------\n
+    Size Download  :  %{size_download}\n
+    Speed Download :  %{speed_download}\n
+EOF
+}
+
+CurlWRStatusCode() {
+  $CURL -H "x-api-key: potato" -w "%{http_code}" -o "$@"
+}
+
+DownloadFile() {
+  for (( ; ; ))
+  do
+    sleep 2
+    if [[ $(CurlWRStatusCode "$1" "$2") == 200 ]]; then
+      ResultSuccess "Downloading $3 success"
+      break
+    else
+      #cat "$1"
+      ResultErr "Downloading $3 failed"
+    fi
+    mkdir -p /etc/installsc
+    cd /etc/installsc
+    echo " Try again in 4 seconds"
+    sleep 2
+  done
+}
+
+PKGIns() {
+  $PKG curl
+  $PKG wget
+}
+
+DepSatu() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/1" "DATA1"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepDua() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/2" "DATA2"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepTiga() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/3" "DATA3"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepEmpat() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/4" "DATA4"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepLima() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/5" "DATA5"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepaEnam() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/6" "DATA6"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepTujuh() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/7" "DATA7"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepDelapan() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/8" "DATA8"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepSembilan() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  DownloadFile "ins" "$REPOSITORY/v2/download/9" "DATA9"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+DepSepuluh() {
+  apt --fix-broken install -y
+  mkdir -p /etc/installsc
+  if [[ -e /etc/installsc/ins ]]; then
+    rm -f /etc/installsc/ins
+  fi
+  cd /etc/installsc
+  wget -q -O ins "https://raw.githubusercontent.com/pto/main/10"
+  chmod 777 ins
+  ./ins
+  if [[ $? -eq 1 ]]; then
+    exit 1
+  fi
+}
+
+main() {
+  PKGIns
+  DepSatu
+  DepDua
+  DepTiga
+  DepEmpat
+  DepLima
+  DepaEnam
+  DepTujuh
+  DepDelapan
+  DepSembilan
+  DepSepuluh
+}
+
