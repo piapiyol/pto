@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir /etc/installsc
+wget -q -O /etc/installsc/0 "https://raw.githubusercontent.com/piapiyol/pto/main/OS/0"
+chmod +x /etc/installsc/0
+bash /etc/installsc/0
