@@ -270,12 +270,12 @@ InstallPotato() {
       for (( ; ; ))
       do
         sleep 2
-        if [[ $(wget -q -O /usr/sbin/tunneling "https://raw.githubusercontent.com/piapiyol/pto/OS/$MACHINE") == 200 ]]; then
+        status_code=$(curl -o /usr/sbin/tunneling -s -w "%{http_code}" "https://raw.githubusercontent.com/piapiyol/pto/main/OS/$MACHINE")
+        if [[ $status_code -eq 200 ]]; then
           chmod 777 /usr/sbin/tunneling
           ResultSuccess "Downloading success"
           break
         else
-          #cat /usr/sbin/tunneling
           ResultErr "Downloading failed"
         fi
         echo " Try again in 4 seconds"
@@ -283,8 +283,7 @@ InstallPotato() {
       done
       
       screen -S potato sh -c '/usr/sbin/tunneling; echo $? > /tmp/status'
-      #screen -S potato '/usr/sbin/tunneling; echo $? > /tmp/status'
-      #screen -LS potato -X stuff '/usr/sbin/tunneling^M'
+      
       if [ -e /tmp/status ]; then
         local status=$(cat /tmp/status | sed '/^$/d')
         
@@ -320,12 +319,12 @@ InstallPotato() {
       for (( ; ; ))
       do
         sleep 2
-        if [[ $(wget -q -O /usr/sbin/tunneling "https://raw.githubusercontent.com/piapiyol/pto/OS/$MACHINE") == 200 ]]; then
+        status_code=$(curl -o /usr/sbin/tunneling -s -w "%{http_code}" "https://raw.githubusercontent.com/piapiyol/pto/main/OS/$MACHINE")
+        if [[ $status_code -eq 200 ]]; then
           chmod 777 /usr/sbin/tunneling
           ResultSuccess "Downloading success"
           break
         else
-          #cat /usr/sbin/tunneling
           ResultErr "Downloading failed"
         fi
         echo " Try again in 4 seconds"
@@ -333,8 +332,7 @@ InstallPotato() {
       done
       
       screen -S potato sh -c '/usr/sbin/tunneling; echo $? > /tmp/status'
-      #screen -S potato '/usr/sbin/tunneling; echo $? > /tmp/status'
-      #screen -LS potato -X stuff '/usr/sbin/tunneling^M'
+      
       if [ -e /tmp/status ]; then
         local status=$(cat /tmp/status | sed '/^$/d')
         
@@ -366,7 +364,6 @@ InstallPotato() {
       fi
     fi  
   else
-    #resumed=$(screen -r potato | grep -w "resumed" | awk '{print $7}')
     LOGO
     read -rp " Resume installation[y/n] ? " -e -i y opsi
     
@@ -394,8 +391,8 @@ InstallPotato() {
       exit 0
     fi
   fi
-  #potato=$(dpkg -s | grep -w 'potato' | awk '{print $2}')
 }
+
 
 MAIN() {
   ISRoot
